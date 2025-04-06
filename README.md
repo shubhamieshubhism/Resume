@@ -2,7 +2,7 @@
 
 Welcome to my digital resume – no more PDFs! This project brings my professional journey to life using just **HTML** & **CSS**. Minimalist. Responsive. Sleek. 💼✨
 
-![Resume Preview](https://via.placeholder.com/1000x300?text=My+Resume+Preview)
+![Resume Preview](http://127.0.0.1:5500/Shubham_Tirpude_Resume_Version2.html)
 
 ---
 
