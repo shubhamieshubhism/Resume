@@ -28,7 +28,7 @@ I wanted a quick, elegant way to showcase my resume without needing recruiters t
 
 ## 🖼️ Preview It Live
 
-➡️ **[Check it out here](https://your-live-site-link.com)** *(Hosted via GitHub Pages / Netlify / Vercel)*  
+➡️ **[Check it out here]([https://your-live-site-link.com](https://shubhamieshubhism.github.io/Resume/))** *(Hosted via GitHub Pages / Netlify / Vercel)*  
 *(Add your deployment link above)*
 
 ---
