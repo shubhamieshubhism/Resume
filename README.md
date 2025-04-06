@@ -2,7 +2,7 @@
 
 Welcome to my digital resume – no more PDFs! This project brings my professional journey to life using just **HTML** & **CSS**. Minimalist. Responsive. Sleek. 💼✨
 
-![resume-preview]([https://via.placeholder.com/1000x300?text=Add+a+cool+preview+image+here](http://127.0.0.1:5500/Shubham_Tirpude_Resume_Version2.html))
+![Resume Preview](https://via.placeholder.com/1000x300?text=My+Resume+Preview)
 
 ---
 
@@ -20,16 +20,15 @@ Think of it as a one-page personal portfolio, but purely handcrafted with love a
 
 I wanted a quick, elegant way to showcase my resume without needing recruiters to download a file or open Google Drive links. So... this happened.
 
-- No frameworks
-- No JavaScript
+- No frameworks  
+- No JavaScript  
 - Just me, some HTML/CSS, and coffee ☕
 
 ---
 
 ## 🖼️ Preview It Live
 
-➡️ **[Check it out here](https://shubhamieshubhism.github.io/Resume/)** *(Hosted via GitHub Pages / Netlify / Vercel)*  
-*(Add your deployment link above)*
+➡️ **[Check it out here](https://shubhamieshubhism.github.io/Resume/)** *(Hosted via GitHub Pages)*
 
 ---
 
@@ -48,6 +47,6 @@ I wanted a quick, elegant way to showcase my resume without needing recruiters t
 Want to see it locally? Just clone and open:
 
 ```bash
-git clone https://github.com/your-username/your-resume-site.git
-cd your-resume-site
+git clone https://github.com/shubhamieshubhism/Resume.git
+cd Resume
 open index.html
