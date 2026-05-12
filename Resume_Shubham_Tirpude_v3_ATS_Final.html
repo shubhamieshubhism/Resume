@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Shubham Tirpude — QA Consultant</title>
+<style>
+/* ── Variables ── */
+:root {
+  --navy:   #152338;
+  --teal:   #0a7f72;
+  --teal-lt:#e4f4f2;
+  --warm:   #f5f3ef;
+  --rule:   #d8d4cc;
+  --body:   #2c2c2c;
+  --muted:  #6b6b6b;
+  --tag-bg: #eae8e3;
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Trebuchet MS', 'Gill Sans', 'Optima', sans-serif;
+  background: var(--warm);
+  color: var(--body);
+  font-size: 13px;
+  line-height: 1.65;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* ── Page wrapper ── */
+.page {
+  max-width: 820px;
+  margin: 28px auto 0;
+  background: #ffffff;
+  box-shadow: 0 2px 32px rgba(0,0,0,0.10);
+}
+
+/* ══════════════════════════════════════
+   HEADER — single block, first in DOM
+   ATS reads name + contact immediately
+══════════════════════════════════════ */
+.resume-header {
+  background: var(--navy);
+  padding: 36px 48px 30px;
+  position: relative;
+}
+/* teal accent stripe at top */
+.resume-header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: var(--teal);
+}
+
+.resume-header h1 {
+  font-family: 'Palatino Linotype', Palatino, Georgia, serif;
+  font-size: 30px;
+  font-weight: normal;
+  color: #ffffff;
+  /* NO letter-spacing — causes PDF extraction spaces */
+  margin-bottom: 3px;
+}
+.resume-header .title {
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #7cc4bb;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+/* ATS-safe contact: plain inline text, no images */
+.contact-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 0;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  padding-top: 14px;
+}
+.contact-line span, .contact-line a {
+  font-size: 11.5px;
+  color: #a8d5d0;
+  text-decoration: none;
+}
+.contact-line a:hover { color: #fff; }
+.contact-line .pipe {
+  color: rgba(255,255,255,0.18);
+  padding: 0 10px;
+}
+
+/* ══════════════════════════════════════
+   BODY — pure single column
+   DOM order = visual order = ATS order
+══════════════════════════════════════ */
+.resume-body {
+  padding: 32px 48px 40px;
+}
+
+/* ── Section headings ──
+   text-transform: uppercase is safe in PDF.
+   NO letter-spacing (that caused "P R O F I L E" issue).
+   Left border accent replaces decorative spacing. */
+.section-heading {
+  font-size: 10.5px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--teal);
+  border-left: 3px solid var(--teal);
+  padding-left: 9px;
+  margin-bottom: 14px;
+  margin-top: 28px;
+  /* no letter-spacing */
+}
+.section-heading:first-child { margin-top: 0; }
+
+/* ── Profile summary ── */
+.summary p {
+  font-size: 13px;
+  line-height: 1.75;
+  color: #3a3a3a;
+}
+
+/* ── Divider ── */
+.divider {
+  height: 1px;
+  background: var(--rule);
+  margin: 22px 0 0;
+}
+
+/* ── Experience entries ── */
+.exp-entry { margin-bottom: 22px; }
+.exp-entry:last-child { margin-bottom: 0; }
+
+.exp-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 2px;
+  margin-bottom: 1px;
+}
+.exp-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--navy);
+  font-family: 'Palatino Linotype', Palatino, Georgia, serif;
+}
+.exp-dates {
+  font-size: 11px;
+  color: var(--muted);
+  white-space: nowrap;
+  font-family: 'Courier New', monospace;
+}
+.exp-company {
+  font-size: 12px;
+  color: var(--teal);
+  margin-bottom: 8px;
+  font-style: italic;
+}
+.exp-bullets {
+  padding-left: 14px;
+  list-style-type: disc;
+}
+.exp-bullets li {
+  font-size: 12.5px;
+  color: var(--body);
+  margin-bottom: 4px;
+  line-height: 1.55;
+}
+.exp-bullets li::marker { color: var(--teal); }
+
+/* ── Skills grid ── */
+.skills-grid { display: flex; flex-direction: column; gap: 10px; }
+.skill-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.skill-label {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--muted);
+  min-width: 128px;
+  padding-top: 3px;
+  flex-shrink: 0;
+}
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+.tag {
+  font-size: 11.5px;
+  padding: 2px 9px;
+  background: var(--tag-bg);
+  color: var(--navy);
+  border-radius: 2px;
+  font-family: 'Courier New', monospace;
+}
+
+/* ── Education ── */
+.edu-entry { margin-bottom: 14px; }
+.edu-entry:last-child { margin-bottom: 0; }
+.edu-degree {
+  font-size: 13.5px;
+  font-weight: bold;
+  color: var(--navy);
+}
+.edu-inst {
+  font-size: 12px;
+  color: var(--body);
+}
+.edu-sub { font-size: 11.5px; color: var(--muted); }
+.edu-year {
+  font-size: 11px;
+  color: var(--teal);
+  font-family: 'Courier New', monospace;
+  margin-top: 1px;
+}
+
+/* ── Certifications ── */
+.cert-item {
+  font-size: 12.5px;
+  color: var(--body);
+  padding: 6px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.cert-item:last-child { border-bottom: none; }
+
+/* ── Bottom two-col: languages + soft skills ──
+   Safe two-column here because it's a small
+   presentational section; ATS content is already
+   above. Uses flexbox which prints correctly. */
+.bottom-cols {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.bottom-col { flex: 1; min-width: 180px; }
+
+.lang-item { margin-bottom: 10px; }
+.lang-name {
+  font-size: 12.5px;
+  font-weight: bold;
+  color: var(--navy);
+}
+.lang-level { font-size: 11px; color: var(--muted); }
+.lang-bar {
+  height: 3px;
+  background: var(--rule);
+  border-radius: 2px;
+  margin-top: 4px;
+}
+.lang-fill {
+  height: 100%;
+  background: var(--teal);
+  border-radius: 2px;
+}
+.soft-list { list-style: none; padding: 0; }
+.soft-list li {
+  font-size: 12.5px;
+  color: var(--body);
+  padding: 4px 0;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.soft-list li::before {
+  content: '';
+  width: 5px; height: 5px;
+  background: var(--teal);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── Print toolbar ── */
+.toolbar {
+  text-align: center;
+  padding: 14px;
+  background: var(--warm);
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+.btn {
+  padding: 9px 26px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 12.5px;
+  font-family: 'Trebuchet MS', sans-serif;
+  font-weight: bold;
+  background: var(--navy);
+  color: #fff;
+}
+.btn:hover { background: #1e3a5c; }
+
+@media print {
+  body { background: white; font-size: 12px; }
+  .page { margin: 0; max-width: 100%; box-shadow: none; }
+  .toolbar { display: none; }
+  .resume-body { padding: 26px 40px 32px; }
+  .resume-header { padding: 28px 40px 22px; }
+  .section-heading { margin-top: 20px; }
+  .exp-entry { margin-bottom: 16px; }
+}
+
+@media (max-width: 600px) {
+  .resume-header, .resume-body { padding-left: 24px; padding-right: 24px; }
+  .skill-row { flex-direction: column; gap: 5px; }
+  .skill-label { min-width: unset; }
+}
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button class="btn" onclick="window.print()">⬇ Download as PDF</button>
+</div>
+
+<div class="page">
+
+  <!-- ══════════════════════════════════
+       HEADER — first in DOM, first in PDF
+       ATS name extraction: guaranteed top
+  ══════════════════════════════════ -->
+  <header class="resume-header">
+    <h1>Shubham Tirpude</h1>
+    <p class="title">QA Consultant &amp; Automation Engineer</p>
+    <div class="contact-line">
+      <a href="mailto:shubhamtirpude20@gmail.com">shubhamtirpude20@gmail.com</a>
+      <span class="pipe">|</span>
+      <span>+91 8698498054</span>
+      <span class="pipe">|</span>
+      <span>Pune, Maharashtra, India</span>
+      <span class="pipe">|</span>
+      <a href="https://www.linkedin.com/in/shubham-tirpude-92b97b2a6" target="_blank">linkedin.com/in/shubham-tirpude-92b97b2a6</a>
+      <span class="pipe">|</span>
+      <a href="https://github.com/shubhamieshubhism" target="_blank">github.com/shubhamieshubhism</a>
+    </div>
+  </header>
+
+  <!-- ══════════════════════════════════
+       BODY — single column, top to bottom
+       DOM order = PDF text order = ATS parse order
+  ══════════════════════════════════ -->
+  <div class="resume-body">
+
+    <!-- Profile Summary -->
+    <section class="summary" aria-label="Profile Summary">
+      <h2 class="section-heading">Profile Summary</h2>
+      <p>Results-driven QA Consultant and Automation Engineer with 5+ years of experience delivering high-quality testing solutions across web and mobile platforms. Expert in Selenium WebDriver, Playwright, Appium, and REST Assured API testing, with hands-on experience building scalable frameworks using Java and TestNG. Skilled in CI/CD pipeline integration via Jenkins, defect tracking with JIRA, and applying Agile/Scrum methodologies throughout the full SDLC and STLC. Proven track record in reducing manual testing effort, improving regression coverage, and driving release confidence through end-to-end automation.</p>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Work Experience -->
+    <section aria-label="Work Experience">
+      <h2 class="section-heading">Work Experience</h2>
+
+      <div class="exp-entry">
+        <div class="exp-meta">
+          <span class="exp-title">QA Consultant</span>
+          <span class="exp-dates">Jul 2025 – Present</span>
+        </div>
+        <div class="exp-company">TechVerito Pvt Ltd</div>
+        <ul class="exp-bullets">
+          <li>Developed and maintained automated test suites for mobile applications using Appium, improving regression coverage and reducing manual testing effort by ~35%</li>
+          <li>Conducted field-based manual testing to validate geofence functionality, ensuring location-triggered features performed accurately in real-world conditions</li>
+          <li>Automated end-to-end web application test flows using Playwright, enhancing release confidence across the web platform</li>
+          <li>Identified and logged critical bugs that directly influenced the product roadmap and served as the foundation for new features and significant application changes</li>
+          <li>Collaborated cross-functionally by actively participating in Agile sprint meetings, contributing QA insights to planning and decision-making</li>
+        </ul>
+      </div>
+
+      <div class="exp-entry">
+        <div class="exp-meta">
+          <span class="exp-title">Software Engineer (QA)</span>
+          <span class="exp-dates">Apr 2024 – Nov 2024</span>
+        </div>
+        <div class="exp-company">Cross Country Infotech</div>
+        <ul class="exp-bullets">
+          <li>Automated 100+ UI test cases using Selenium WebDriver, reducing manual testing effort by 30%</li>
+          <li>Optimized regression suite execution time by 25% through parallel execution configuration in TestNG</li>
+          <li>Identified flaky tests and implemented robust locators, reducing intermittent test failures by 20%</li>
+          <li>Designed comprehensive test scenarios and authored test cases covering functional, regression, and system testing requirements</li>
+          <li>Actively tracked and logged defects using JIRA, ensuring timely triage and resolution by development teams</li>
+          <li>Collaborated with cross-functional teams in an Agile environment to define test requirements, develop test strategies, and ensure product quality</li>
+          <li>Applied deep understanding of SDLC and STLC to align testing activities with release milestones</li>
+          <li>Led automation efforts during Business Readiness Testing for 5+ core workflows</li>
+        </ul>
+      </div>
+
+      <div class="exp-entry">
+        <div class="exp-meta">
+          <span class="exp-title">Software Test Engineer</span>
+          <span class="exp-dates">Jul 2020 – Mar 2024</span>
+        </div>
+        <div class="exp-company">GroRich TenTsystems Pvt Ltd</div>
+        <ul class="exp-bullets">
+          <li>Built a custom Selenium + TestNG framework with reusable components, utilities, and data-driven flows using Excel and Properties file integration</li>
+          <li>Achieved 90% test coverage across login, dashboard, and form modules; executed suites on Chrome and Edge with minimal flakiness</li>
+          <li>Designed, developed, and maintained robust, scalable automation scripts using Java and Selenium WebDriver</li>
+          <li>Automated regression, smoke, and functional test cases for web-based applications, reducing manual QA cycle time significantly</li>
+          <li>Integrated Selenium scripts with TestNG for test management and reporting; used Jenkins pipelines to trigger automated test cases in CI/CD workflows</li>
+          <li>Conducted defect tracking and reporting using JIRA/ALM, ensuring timely resolution and traceability</li>
+          <li>Participated in code reviews to ensure quality and maintainability of automation scripts</li>
+          <li>Mentored junior testers in Selenium, Java, and test automation best practices</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Technical Skills -->
+    <section aria-label="Technical Skills">
+      <h2 class="section-heading">Technical Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-row">
+          <span class="skill-label">Languages</span>
+          <div class="skill-tags">
+            <span class="tag">Java</span>
+            <span class="tag">SQL</span>
+          </div>
+        </div>
+        <div class="skill-row">
+          <span class="skill-label">Automation Tools</span>
+          <div class="skill-tags">
+            <span class="tag">Selenium WebDriver</span>
+            <span class="tag">Playwright</span>
+            <span class="tag">Appium</span>
+            <span class="tag">REST Assured</span>
+            <span class="tag">Postman</span>
+          </div>
+        </div>
+        <div class="skill-row">
+          <span class="skill-label">Frameworks</span>
+          <div class="skill-tags">
+            <span class="tag">TestNG</span>
+            <span class="tag">Page Object Model</span>
+            <span class="tag">Data-Driven Framework</span>
+          </div>
+        </div>
+        <div class="skill-row">
+          <span class="skill-label">DevOps / CI-CD</span>
+          <div class="skill-tags">
+            <span class="tag">Jenkins</span>
+            <span class="tag">Maven</span>
+            <span class="tag">Git</span>
+          </div>
+        </div>
+        <div class="skill-row">
+          <span class="skill-label">Defect &amp; PM Tools</span>
+          <div class="skill-tags">
+            <span class="tag">JIRA</span>
+            <span class="tag">ALM</span>
+            <span class="tag">PG Admin</span>
+          </div>
+        </div>
+        <div class="skill-row">
+          <span class="skill-label">IDE &amp; Database</span>
+          <div class="skill-tags">
+            <span class="tag">IntelliJ IDEA</span>
+            <span class="tag">Eclipse</span>
+            <span class="tag">VS Code</span>
+            <span class="tag">MySQL</span>
+          </div>
+        </div>
+        <div class="skill-row">
+          <span class="skill-label">Testing Approach</span>
+          <div class="skill-tags">
+            <span class="tag">Agile / Scrum</span>
+            <span class="tag">Regression</span>
+            <span class="tag">Smoke</span>
+            <span class="tag">UI Testing</span>
+            <span class="tag">End-to-End</span>
+            <span class="tag">API Testing</span>
+            <span class="tag">Mobile Testing</span>
+          </div>
+        </div>
+        <div class="skill-row">
+          <span class="skill-label">Platforms</span>
+          <div class="skill-tags">
+            <span class="tag">Windows</span>
+            <span class="tag">Web Applications</span>
+            <span class="tag">Android (Appium)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Education -->
+    <section aria-label="Education">
+      <h2 class="section-heading">Education</h2>
+
+      <div class="edu-entry">
+        <div class="edu-degree">Bachelor of Engineering</div>
+        <div class="edu-inst">Priyadarshini JL College of Engineering, Nagpur</div>
+        <div class="edu-sub">Rashtrasant Tukdoji Maharaj Nagpur University</div>
+        <div class="edu-year">Graduated 2020</div>
+      </div>
+
+      <div class="edu-entry">
+        <div class="edu-degree">Higher Secondary (XII)</div>
+        <div class="edu-inst">New English Junior College, Wardha</div>
+        <div class="edu-year">Completed 2016</div>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Certifications -->
+    <section aria-label="Courses and Certifications">
+      <h2 class="section-heading">Courses &amp; Certifications</h2>
+      <div class="cert-item">REST Assured API Automation from Scratch + Framework + CI/CD Integration</div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Languages + Soft Skills — side by side only at the bottom,
+         after all primary ATS content has been parsed -->
+    <section aria-label="Languages and Soft Skills">
+      <h2 class="section-heading">Languages &amp; Soft Skills</h2>
+      <div class="bottom-cols">
+
+        <div class="bottom-col">
+          <div class="lang-item">
+            <div class="lang-name">English</div>
+            <div class="lang-level">Full Professional Proficiency</div>
+            <div class="lang-bar"><div class="lang-fill" style="width:90%"></div></div>
+          </div>
+          <div class="lang-item">
+            <div class="lang-name">Marathi</div>
+            <div class="lang-level">Native Fluency</div>
+            <div class="lang-bar"><div class="lang-fill" style="width:100%"></div></div>
+          </div>
+          <div class="lang-item">
+            <div class="lang-name">Hindi</div>
+            <div class="lang-level">Professional Working Proficiency</div>
+            <div class="lang-bar"><div class="lang-fill" style="width:75%"></div></div>
+          </div>
+        </div>
+
+        <div class="bottom-col">
+          <ul class="soft-list">
+            <li>Effective Communication</li>
+            <li>Time &amp; Task Management</li>
+            <li>Cross-functional Collaboration</li>
+            <li>Mentoring &amp; Knowledge Sharing</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+  </div><!-- /resume-body -->
+</div><!-- /page -->
+
+<div class="toolbar">
+  <button class="btn" onclick="window.print()">⬇ Download as PDF</button>
+</div>
+
+</body>
+</html>

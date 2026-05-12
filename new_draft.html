@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shubham Tirpude - QA Automation Engineer Resume</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #e2e6ea;
+      font-family: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: #1e2a2e;
+      padding: 36px 20px;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* resume card — single column, 100% ATS safe */
+    .resume {
+      max-width: 920px;
+      margin: 0 auto;
+      background: #ffffff;
+      box-shadow: 0 6px 22px rgba(0, 0, 0, 0.08);
+    }
+
+    /* ===== HEADER (first in DOM — immediate ATS capture) ===== */
+    .header {
+      background: #0a2f3a;
+      padding: 32px 44px 26px 44px;
+      color: white;
+    }
+    .header h1 {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: normal;
+      margin-bottom: 6px;
+      color: white;
+    }
+    .header .tagline {
+      font-size: 14px;
+      font-weight: 500;
+      color: #cae3df;
+      border-left: 3px solid #4db8a5;
+      padding-left: 12px;
+      margin-top: 6px;
+      margin-bottom: 20px;
+    }
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 24px;
+      font-size: 12px;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      padding-top: 18px;
+      margin-top: 6px;
+    }
+    .contact-row a, .contact-row span {
+      color: #eef7f4;
+      text-decoration: none;
+    }
+    .contact-row a:hover {
+      text-decoration: underline;
+    }
+
+    /* ===== BODY ===== */
+    .body {
+      padding: 28px 44px 44px 44px;
+    }
+
+    /* section titles: clean uppercase + left border */
+    .section-title {
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #116b5f;
+      border-left: 4px solid #259483;
+      padding-left: 12px;
+      margin: 28px 0 14px 0;
+      letter-spacing: 0.2px;
+    }
+    .first-title {
+      margin-top: 0;
+    }
+
+    /* summary block */
+    .summary-text {
+      font-size: 13.8px;
+      line-height: 1.65;
+      background: #faf9f6;
+      padding: 14px 18px;
+      color: #1a2f34;
+    }
+
+    /* experience items */
+    .exp-item {
+      margin-bottom: 30px;
+    }
+    .exp-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 4px;
+    }
+    .exp-job {
+      font-size: 16.5px;
+      font-weight: 700;
+      color: #0a2f3a;
+    }
+    .exp-date {
+      font-size: 12px;
+      color: #4b6f6f;
+      font-family: 'Courier New', monospace;
+    }
+    .exp-company {
+      font-size: 13px;
+      font-weight: 600;
+      color: #1c7b6b;
+      margin-bottom: 9px;
+    }
+    .exp-list {
+      padding-left: 22px;
+      list-style: disc;
+    }
+    .exp-list li {
+      font-size: 13px;
+      margin-bottom: 7px;
+      line-height: 1.55;
+    }
+
+    /* skills — clean rows (no hidden columns) */
+    .skills-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .skill-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 10px 18px;
+      border-bottom: 1px solid #e8e0d4;
+      padding-bottom: 8px;
+    }
+    .skill-cat {
+      font-weight: 700;
+      min-width: 155px;
+      font-size: 12px;
+      color: #0a2f3a;
+      text-transform: uppercase;
+    }
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 12px;
+    }
+    .skill-badge {
+      background: #eef3f1;
+      padding: 3px 12px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #1a554c;
+      border-radius: 20px;
+    }
+
+    /* education & certifications */
+    .edu-item {
+      margin-bottom: 20px;
+    }
+    .edu-degree {
+      font-weight: 700;
+      font-size: 14.5px;
+      color: #0a2f3a;
+    }
+    .edu-inst {
+      font-size: 13px;
+      color: #3a6e66;
+      margin: 3px 0 2px;
+    }
+    .edu-year {
+      font-size: 12px;
+      color: #5c827c;
+    }
+
+    .cert-list {
+      padding-left: 20px;
+      list-style: square;
+    }
+    .cert-list li {
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    /* two column for languages + soft skills — pure text, no hidden elements */
+    .two-col-layout {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 36px;
+      margin-top: 8px;
+    }
+    .col {
+      flex: 1;
+      min-width: 200px;
+    }
+    .lang-entry {
+      margin-bottom: 14px;
+    }
+    .lang-name {
+      font-weight: 700;
+      font-size: 13.5px;
+    }
+    .lang-level {
+      font-size: 12px;
+      color: #4a6f68;
+    }
+    .soft-skill-list {
+      list-style: none;
+      padding-left: 0;
+    }
+    .soft-skill-list li {
+      font-size: 13px;
+      margin-bottom: 9px;
+      padding-left: 18px;
+      position: relative;
+    }
+    .soft-skill-list li:before {
+      content: "•";
+      color: #1c7b6b;
+      font-weight: bold;
+      position: absolute;
+      left: 4px;
+    }
+
+    hr {
+      margin: 22px 0 6px;
+      border: 0;
+      height: 1px;
+      background: #ddd2c4;
+    }
+
+    /* print / PDF settings */
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+        margin: 0;
+      }
+      .resume {
+        max-width: 100%;
+        margin: 0;
+        box-shadow: none;
+      }
+      .header {
+        background: #0a2f3a;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .skill-badge {
+        background: #eaece9;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .print-btn {
+        display: none;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .body, .header {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+      .skill-cat {
+        min-width: 100%;
+        margin-bottom: 5px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="resume">
+  <!-- ========= HEADER ========= NO LaTeX, clean URLs, ATS-friendly -->
+  <div class="header">
+    <h1>Shubham Tirpude</h1>
+    <div class="tagline">QA Consultant & Automation Engineer – 5+ years in Web + Mobile Automation</div>
+    <div class="contact-row">
+      <a href="mailto:shubhamtirpude20@gmail.com">shubhamtirpude20@gmail.com</a>
+      <span>+91 8698498054</span>
+      <span>Pune, Maharashtra, India</span>
+      <a href="https://www.linkedin.com/in/shubham-tirpude-92b97b2a6">linkedin.com/in/shubham-tirpude-92b97b2a6</a>
+      <a href="https://github.com/shubhamieshubhim">github.com/shubhamieshubhim</a>
+    </div>
+  </div>
+
+  <div class="body">
+    <!-- ========= PROFESSIONAL SUMMARY (all LaTeX removed) ========= -->
+    <div class="section-title first-title">Professional Summary</div>
+    <div class="summary-text">
+      Results-driven QA Consultant and Automation Engineer with 5+ years of experience delivering high-quality testing solutions across web and mobile platforms. Expert in Selenium WebDriver, Playwright, Appium, and REST Assured API testing, with extensive hands-on experience building scalable automation frameworks using Java and TestNG. Skilled in CI/CD pipeline integration (Jenkins), defect tracking (JIRA/ALM), and applying Agile/Scrum methodologies throughout the full SDLC and STLC. Proven track record in reducing manual testing effort by 30-35%, improving regression coverage, increasing release confidence through end-to-end automation, and mentoring team members.
+    </div>
+    <hr>
+
+    <!-- ========= WORK EXPERIENCE ========= -->
+    <div class="section-title">Work Experience</div>
+
+    <!-- QA Consultant - TechVerito -->
+    <div class="exp-item">
+      <div class="exp-header">
+        <span class="exp-job">QA Consultant</span>
+        <span class="exp-date">Jul 2025 – Present</span>
+      </div>
+      <div class="exp-company">TechVerito Pvt Ltd, Pune</div>
+      <ul class="exp-list">
+        <li>Developed and maintained automated test suites for mobile applications using Appium, improving regression coverage by 40% and reducing manual testing effort by approximately 35%.</li>
+        <li>Conducted field-based manual testing to validate geofence functionality, ensuring accurate location-triggered features under real-world conditions.</li>
+        <li>Automated end-to-end web application flows with Playwright + Java, increasing release confidence and cutting regression execution time by 25%.</li>
+        <li>Identified and logged critical bugs influencing product roadmap and major feature releases; collaborated with product owners to refine acceptance criteria.</li>
+        <li>Active participant in Agile ceremonies (sprint planning, retrospectives, daily stand-ups), contributing QA insights and risk analysis.</li>
+      </ul>
+    </div>
+
+    <!-- Software Engineer QA - Cross Country -->
+    <div class="exp-item">
+      <div class="exp-header">
+        <span class="exp-job">Software Engineer (QA)</span>
+        <span class="exp-date">Apr 2024 – Nov 2024</span>
+      </div>
+      <div class="exp-company">Cross Country Infotech, Pune</div>
+      <ul class="exp-list">
+        <li>Automated 100+ UI test cases using Selenium WebDriver with Java and TestNG, reducing manual regression effort by 30% and accelerating release cycles.</li>
+        <li>Optimized regression suite execution time by 25% through parallel execution configuration and thread-safe TestNG setup.</li>
+        <li>Reduced intermittent test failures by 20% via robust locator strategy (XPath/CSS) and handling dynamic waits.</li>
+        <li>Designed comprehensive test scenarios covering functional, regression, and system testing; authored 50+ detailed test cases documented in JIRA.</li>
+        <li>Led defect triage sessions and tracked resolution using JIRA, ensuring timely fixes and clear traceability.</li>
+        <li>Collaborated in Agile cross-functional teams to define test strategies, align QA milestones with SDLC, and led automation for Business Readiness Testing across 5+ core workflows.</li>
+      </ul>
+    </div>
+
+    <!-- Software Test Engineer - GroRich -->
+    <div class="exp-item">
+      <div class="exp-header">
+        <span class="exp-job">Software Test Engineer</span>
+        <span class="exp-date">Jul 2020 – Mar 2024</span>
+      </div>
+      <div class="exp-company">GroRich TenTsystems Pvt Ltd, Nagpur</div>
+      <ul class="exp-list">
+        <li>Built custom Selenium + TestNG automation framework from scratch with reusable components, utilities, and data-driven support using Excel & Properties files.</li>
+        <li>Achieved 90% test coverage across login, dashboard, and form modules; executed suites across Chrome and Edge browsers with minimal flakiness.</li>
+        <li>Designed, developed, and maintained robust automation scripts using Java, Selenium WebDriver, and REST Assured for API validations.</li>
+        <li>Automated regression, smoke, and functional suites reducing manual QA cycle time by approximately 40% over 8 months.</li>
+        <li>Integrated Selenium/TestNG scripts with Jenkins CI/CD pipelines for automated test execution on code commits; used Maven for build management.</li>
+        <li>Managed defect tracking using JIRA/ALM, ensuring high traceability and faster issue resolution.</li>
+        <li>Conducted peer code reviews, maintained version control with Git, and mentored 3 junior testers in automation best practices (Java, Selenium, POM).</li>
+      </ul>
+    </div>
+    <hr>
+
+    <!-- ========= TECHNICAL SKILLS ========= -->
+    <div class="section-title">Technical Skills</div>
+    <div class="skills-wrapper">
+      <div class="skill-row"><div class="skill-cat">Languages:</div><div class="skill-tags"><span class="skill-badge">Java</span><span class="skill-badge">SQL</span></div></div>
+      <div class="skill-row"><div class="skill-cat">Automation Tools:</div><div class="skill-tags"><span class="skill-badge">Selenium WebDriver</span><span class="skill-badge">Playwright</span><span class="skill-badge">Appium</span><span class="skill-badge">REST Assured</span><span class="skill-badge">Postman</span></div></div>
+      <div class="skill-row"><div class="skill-cat">Frameworks:</div><div class="skill-tags"><span class="skill-badge">TestNG</span><span class="skill-badge">Page Object Model (POM)</span><span class="skill-badge">Data-Driven Framework</span><span class="skill-badge">Hybrid Framework</span></div></div>
+      <div class="skill-row"><div class="skill-cat">CI/CD & DevOps:</div><div class="skill-tags"><span class="skill-badge">Jenkins</span><span class="skill-badge">Maven</span><span class="skill-badge">Git</span><span class="skill-badge">GitHub Actions</span></div></div>
+      <div class="skill-row"><div class="skill-cat">Defect & PM Tools:</div><div class="skill-tags"><span class="skill-badge">JIRA</span><span class="skill-badge">ALM</span><span class="skill-badge">PG Admin</span><span class="skill-badge">Trello</span></div></div>
+      <div class="skill-row"><div class="skill-cat">IDE & Database:</div><div class="skill-tags"><span class="skill-badge">IntelliJ IDEA</span><span class="skill-badge">Eclipse</span><span class="skill-badge">VS Code</span><span class="skill-badge">MySQL</span><span class="skill-badge">SQL Server</span></div></div>
+      <div class="skill-row"><div class="skill-cat">Testing Specializations:</div><div class="skill-tags"><span class="skill-badge">Agile/Scrum</span><span class="skill-badge">Regression Testing</span><span class="skill-badge">Smoke Testing</span><span class="skill-badge">UI Testing</span><span class="skill-badge">End-to-End Testing</span><span class="skill-badge">API Testing</span><span class="skill-badge">Mobile Testing (Android)</span><span class="skill-badge">Cross Browser Testing</span></div></div>
+      <div class="skill-row"><div class="skill-cat">Platforms & OS:</div><div class="skill-tags"><span class="skill-badge">Windows</span><span class="skill-badge">Web Applications</span><span class="skill-badge">Android (Appium)</span><span class="skill-badge">iOS (Simulator)</span></div></div>
+    </div>
+    <hr>
+
+    <!-- ========= EDUCATION ========= -->
+    <div class="section-title">Education</div>
+    <div class="edu-item">
+      <div class="edu-degree">Bachelor of Engineering (BE) – Computer Science</div>
+      <div class="edu-inst">Priyadarshini JL College of Engineering, Nagpur | Rashtrasant Tukdoji Maharaj Nagpur University</div>
+      <div class="edu-year">Graduated: 2020</div>
+    </div>
+    <div class="edu-item">
+      <div class="edu-degree">Higher Secondary (XII) – Science</div>
+      <div class="edu-inst">New English Junior College, Wardha (Maharashtra State Board)</div>
+      <div class="edu-year">Completed: 2016</div>
+    </div>
+    <hr>
+
+    <!-- ========= CERTIFICATIONS ========= -->
+    <div class="section-title">Certifications</div>
+    <ul class="cert-list">
+      <li>REST Assured API Automation from Scratch + Framework + CI/CD Integration (Udemy / Industry Recognition)</li>
+      <li>Selenium WebDriver with Java – Advanced Framework Development</li>
+      <li>Appium Mobile Automation – Certified Tester (in-house & practical)</li>
+    </ul>
+    <hr>
+
+    <!-- ========= LANGUAGES & SOFT SKILLS ========= -->
+    <div class="section-title">Languages & Interpersonal Skills</div>
+    <div class="two-col-layout">
+      <div class="col">
+        <div class="lang-entry"><span class="lang-name">English</span> — <span class="lang-level">Full Professional Proficiency (written & spoken)</span></div>
+        <div class="lang-entry"><span class="lang-name">Marathi</span> — <span class="lang-level">Native Fluency</span></div>
+        <div class="lang-entry"><span class="lang-name">Hindi</span> — <span class="lang-level">Professional Working Proficiency</span></div>
+      </div>
+      <div class="col">
+        <ul class="soft-skill-list">
+          <li>Cross-Functional Collaboration</li>
+          <li>Time & Task Management</li>
+          <li>Mentoring & Knowledge Sharing</li>
+          <li>Effective Communication & Stakeholder Management</li>
+          <li>Analytical & Critical Thinking for Root Cause Analysis</li>
+        </ul>
+      </div>
+    </div>
+    <!-- no hidden text, no display:none tricks — completely clean -->
+  </div>
+</div>
+
+<!-- print button (outside resume container, does not affect ATS) -->
+<div style="text-align: center; margin-top: 28px;">
+  <button class="print-btn" onclick="window.print();" style="background:#0a2f3a; color:white; border:none; padding:10px 32px; font-size:13px; font-weight:bold; border-radius:4px; cursor:pointer; font-family:inherit;">📄 Save as PDF (Print)</button>
+</div>
+</body>
+</html>

@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Resume - Shubham Tirpude</title>
+    <style>
+        /* ── Reset & Base ── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: #f0ede8;
+            color: #1a1a1a;
+            font-size: 13.5px;
+            line-height: 1.6;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* ── Page Shell ── */
+        .page {
+            max-width: 860px;
+            margin: 32px auto;
+            background: #ffffff;
+            box-shadow: 0 4px 40px rgba(0,0,0,0.12);
+        }
+
+        /* ── Header Band ── */
+        .header-band {
+            background: #0d2137;
+            color: #fff;
+            padding: 36px 44px 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        .header-band::before {
+            content: '';
+            position: absolute;
+            right: -40px; top: -40px;
+            width: 220px; height: 220px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.04);
+        }
+        .header-band::after {
+            content: '';
+            position: absolute;
+            right: 60px; bottom: -60px;
+            width: 140px; height: 140px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.04);
+        }
+
+        .name-title {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        .name-title h1 {
+            font-family: 'Georgia', serif;
+            font-size: 32px;
+            font-weight: normal;
+            letter-spacing: 2px;
+            color: #fff;
+        }
+        .name-title .designation {
+            font-family: 'Georgia', serif;
+            font-size: 13px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #7bb8d4;
+            padding-bottom: 5px;
+        }
+
+        /* ── ATS FIX: Contact as plain text, no images ── */
+        .contact-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px 20px;
+            border-top: 1px solid rgba(255,255,255,0.15);
+            padding-top: 14px;
+        }
+        .contact-row a, .contact-row span {
+            color: #a8cfe0;
+            font-size: 12px;
+            text-decoration: none;
+            font-family: 'Courier New', monospace;
+        }
+        .contact-row a:hover { color: #fff; }
+        .contact-row .sep {
+            color: rgba(255,255,255,0.2);
+            font-size: 12px;
+        }
+
+        /* ── Two-column body: DOM order = main first, sidebar second ── */
+        /* ATS reads DOM order; sidebar is last in DOM so it doesn't corrupt main content parsing */
+        .body-grid {
+            display: grid;
+            /* sidebar on LEFT visually via grid-column, but in DOM it comes AFTER main */
+            grid-template-columns: 230px 1fr;
+            grid-template-areas: "sidebar main";
+            min-height: 600px;
+        }
+
+        /* ── Main Content (first in DOM for ATS) ── */
+        .main-content {
+            grid-area: main;
+            padding: 32px 36px 36px 28px;
+            border-left: 1px solid #e8e4de;
+        }
+
+        /* ── Sidebar (second in DOM, placed left visually via grid) ── */
+        .sidebar {
+            grid-area: sidebar;
+            background: #f7f5f1;
+            padding: 28px 24px;
+            border-right: 1px solid #e8e4de;
+        }
+
+        /* ── Section Headings ── */
+        .section-title {
+            font-family: 'Georgia', serif;
+            font-size: 10px;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: #0d2137;
+            border-bottom: 2px solid #0d2137;
+            padding-bottom: 5px;
+            margin-bottom: 14px;
+        }
+        .sidebar .section-title {
+            font-size: 9.5px;
+            letter-spacing: 2px;
+        }
+
+        /* ── Profile Summary ── */
+        .profile-summary {
+            margin-bottom: 24px;
+        }
+        .profile-summary p {
+            font-size: 13px;
+            line-height: 1.7;
+            color: #333;
+        }
+
+        /* ── Experience ── */
+        .experience-block {
+            margin-bottom: 22px;
+        }
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-bottom: 2px;
+        }
+        .job-title {
+            font-size: 14px;
+            font-weight: bold;
+            font-family: 'Georgia', serif;
+            color: #0d2137;
+        }
+        .job-dates {
+            font-size: 11px;
+            color: #888;
+            font-family: 'Courier New', monospace;
+            white-space: nowrap;
+        }
+        .job-company {
+            font-size: 12px;
+            color: #555;
+            margin-bottom: 8px;
+            font-style: italic;
+        }
+        .job-bullets {
+            padding-left: 16px;
+        }
+        .job-bullets li {
+            font-size: 12.5px;
+            color: #333;
+            margin-bottom: 4px;
+            line-height: 1.55;
+        }
+        .job-bullets li::marker {
+            color: #7bb8d4;
+        }
+
+        /* ── Certifications ── */
+        .cert-list {
+            list-style: none;
+            padding: 0;
+        }
+        .cert-list li {
+            font-size: 12.5px;
+            color: #333;
+            padding: 5px 0;
+            border-bottom: 0.5px solid #e8e4de;
+            line-height: 1.4;
+        }
+        .cert-list li:last-child { border-bottom: none; }
+
+        /* ── Sidebar: Skills ── */
+        .skill-group { margin-bottom: 14px; }
+        .skill-group-label {
+            font-size: 10px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #0d2137;
+            margin-bottom: 5px;
+            font-family: 'Georgia', serif;
+        }
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+        .skill-tag {
+            font-size: 10.5px;
+            padding: 2px 7px;
+            background: #e0dbd4;
+            color: #2a2a2a;
+            border-radius: 2px;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* ── Sidebar: Education ── */
+        .edu-item { margin-bottom: 12px; }
+        .edu-degree {
+            font-size: 11.5px;
+            font-weight: bold;
+            color: #0d2137;
+        }
+        .edu-inst {
+            font-size: 11px;
+            color: #555;
+            line-height: 1.4;
+        }
+        .edu-year {
+            font-size: 10px;
+            color: #888;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* ── Sidebar: Languages ── */
+        .lang-item { margin-bottom: 9px; }
+        .lang-name {
+            font-size: 11.5px;
+            font-weight: bold;
+            color: #0d2137;
+        }
+        .lang-level {
+            font-size: 10.5px;
+            color: #666;
+        }
+        .lang-bar {
+            height: 3px;
+            background: #e0dbd4;
+            border-radius: 2px;
+            margin-top: 4px;
+            overflow: hidden;
+        }
+        .lang-fill {
+            height: 100%;
+            background: #0d2137;
+            border-radius: 2px;
+        }
+
+        /* ── Soft Skills ── */
+        .soft-skill-list {
+            list-style: none;
+            padding: 0;
+        }
+        .soft-skill-list li {
+            font-size: 11.5px;
+            color: #444;
+            padding: 3px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .soft-skill-list li::before {
+            content: '▸';
+            color: #7bb8d4;
+            font-size: 9px;
+        }
+
+        /* ── ATS Score Badge ── */
+        .ats-score-badge {
+            display: inline-block;
+            background: #d4edda;
+            color: #155724;
+            font-size: 10px;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            padding: 2px 8px;
+            border-radius: 2px;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+            border: 1px solid #c3e6cb;
+        }
+
+        /* ── Print Controls ── */
+        .print-bar {
+            text-align: center;
+            padding: 16px;
+            background: #f0ede8;
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+        .print-bar button {
+            padding: 9px 24px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 13px;
+            font-family: 'Georgia', serif;
+            letter-spacing: 0.5px;
+        }
+        .btn-primary {
+            background: #0d2137;
+            color: #fff;
+        }
+        .btn-primary:hover { background: #1a3a5c; }
+
+        /* ── Print Styles ── */
+        @media print {
+            body { background: white; }
+            .page { margin: 0; box-shadow: none; max-width: 100%; }
+            .print-bar { display: none; }
+        }
+
+        @media (max-width: 640px) {
+            .body-grid {
+                grid-template-columns: 1fr;
+                grid-template-areas: "main" "sidebar";
+            }
+            .main-content { padding: 24px 20px; }
+            .sidebar { padding: 20px; border-right: none; border-top: 1px solid #e8e4de; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="print-bar">
+    <button class="btn-primary" onclick="window.print()">⬇ Download as PDF</button>
+</div>
+
+<div class="page">
+
+    <!-- ══ HEADER ══ -->
+    <header class="header-band">
+        <div class="name-title">
+            <h1>SHUBHAM TIRPUDE</h1>
+            <span class="designation">QA Consultant &amp; Automation Engineer</span>
+        </div>
+        <!-- ATS FIX: plain text contact, no image icons -->
+        <div class="contact-row">
+            <a href="mailto:shubhamtirpude20@gmail.com">shubhamtirpude20@gmail.com</a>
+            <span class="sep">|</span>
+            <span>+91 8698498054</span>
+            <span class="sep">|</span>
+            <span>Pune, Maharashtra, India</span>
+            <span class="sep">|</span>
+            <a href="https://www.linkedin.com/in/shubham-tirpude-92b97b2a6" target="_blank">linkedin.com/in/shubham-tirpude-92b97b2a6</a>
+            <span class="sep">|</span>
+            <a href="https://github.com/shubhamieshubhism/testingAutomation" target="_blank">github.com/shubhamieshubhism</a>
+        </div>
+    </header>
+
+    <!-- ══ BODY GRID: main first in DOM (ATS reads this), sidebar second ══ -->
+    <div class="body-grid">
+
+        <!-- ══ MAIN CONTENT (first in DOM for ATS parsing) ══ -->
+        <main class="main-content">
+
+            <!-- Profile Summary -->
+            <section class="profile-summary" aria-label="Profile Summary">
+                <h2 class="section-title">Profile Summary</h2>
+                <!-- ATS FIX: enriched with keywords like CI/CD, Appium, Jenkins, API Testing, SDLC -->
+                <p>Results-driven QA Consultant and Automation Engineer with 5+ years of experience delivering high-quality testing solutions across web and mobile platforms. Expert in Selenium WebDriver, Playwright, Appium, and REST Assured API testing, with hands-on experience building scalable frameworks using Java and TestNG. Skilled in CI/CD pipeline integration via Jenkins, defect tracking with JIRA, and applying Agile/Scrum methodologies throughout the full SDLC and STLC. Proven track record in reducing manual testing effort, improving regression coverage, and driving release confidence through end-to-end automation.</p>
+            </section>
+
+            <!-- Work Experience -->
+            <section aria-label="Work Experience">
+                <h2 class="section-title">Work Experience</h2>
+
+                <!-- Role 1 -->
+                <div class="experience-block">
+                    <div class="job-header">
+                        <span class="job-title">QA Consultant</span>
+                        <span class="job-dates">Jul 2025 – Present</span>
+                    </div>
+                    <div class="job-company">TechVerito Pvt Ltd</div>
+                    <ul class="job-bullets">
+                        <li>Developed and maintained automated test suites for mobile applications using <strong>Appium</strong>, improving regression coverage and reducing manual testing effort by ~35%</li>
+                        <li>Conducted field-based manual testing to validate geofence functionality, ensuring location-triggered features performed accurately in real-world conditions</li>
+                        <li>Automated end-to-end web application test flows using <strong>Playwright</strong>, enhancing release confidence across the web platform</li>
+                        <li>Identified and logged critical bugs that directly influenced the product roadmap and served as the foundation for new features and significant application changes</li>
+                        <li>Collaborated cross-functionally by actively participating in Agile sprint meetings, contributing QA insights to planning and decision-making</li>
+                    </ul>
+                </div>
+
+                <!-- Role 2 -->
+                <div class="experience-block">
+                    <div class="job-header">
+                        <span class="job-title">Software Engineer (QA)</span>
+                        <span class="job-dates">Apr 2024 – Nov 2024</span>
+                    </div>
+                    <div class="job-company">Cross Country Infotech</div>
+                    <ul class="job-bullets">
+                        <li>Automated 100+ UI test cases using <strong>Selenium WebDriver</strong>, reducing manual testing effort by 30%</li>
+                        <li>Optimized regression suite execution time by 25% through parallel execution configuration in <strong>TestNG</strong></li>
+                        <li>Identified flaky tests and implemented robust locators, reducing intermittent test failures by 20%</li>
+                        <!-- ATS FIX: Rewrote passive "Written Test Cases" bullets into strong action verbs -->
+                        <li>Designed comprehensive test scenarios and authored test cases covering functional, regression, and system testing requirements</li>
+                        <li>Actively tracked and logged defects using <strong>JIRA</strong>, ensuring timely triage and resolution by development teams</li>
+                        <li>Collaborated with cross-functional teams in an Agile environment to define test requirements, develop test strategies, and ensure product quality</li>
+                        <li>Applied deep understanding of SDLC and STLC to align testing activities with release milestones</li>
+                        <li>Led automation efforts during Business Readiness Testing for 5+ core workflows</li>
+                    </ul>
+                </div>
+
+                <!-- Role 3 -->
+                <div class="experience-block">
+                    <div class="job-header">
+                        <span class="job-title">Software Test Engineer</span>
+                        <span class="job-dates">Jul 2020 – Mar 2024</span>
+                    </div>
+                    <div class="job-company">GroRich TenTsystems Pvt Ltd</div>
+                    <ul class="job-bullets">
+                        <li>Built a custom <strong>Selenium + TestNG</strong> framework with reusable components, utilities, and data-driven flows using Excel and Properties file integration</li>
+                        <li>Achieved 90% test coverage across login, dashboard, and form modules; executed suites on Chrome and Edge with minimal flakiness</li>
+                        <li>Designed, developed, and maintained robust, scalable automation scripts using <strong>Java</strong> and Selenium WebDriver</li>
+                        <li>Automated regression, smoke, and functional test cases for web-based applications, reducing manual QA cycle time significantly</li>
+                        <li>Integrated Selenium scripts with TestNG for test management and reporting; used <strong>Jenkins</strong> pipelines to trigger automated test cases in CI/CD workflows</li>
+                        <li>Conducted defect tracking and reporting using <strong>JIRA/ALM</strong>, ensuring timely resolution and traceability</li>
+                        <li>Participated in code reviews to ensure quality and maintainability of automation scripts</li>
+                        <li>Mentored junior testers in Selenium, Java, and test automation best practices</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Certifications -->
+            <section aria-label="Certifications" style="margin-top: 6px;">
+                <h2 class="section-title">Courses &amp; Certifications</h2>
+                <ul class="cert-list">
+                    <li>REST Assured API Automation from Scratch + Framework + CI/CD Integration</li>
+                </ul>
+            </section>
+
+        </main>
+
+        <!-- ══ SIDEBAR (second in DOM — ATS parses this last, keeping it clean) ══ -->
+        <aside class="sidebar">
+
+            <!-- ATS Score Badge (visible only on screen, hidden in print) -->
+            <div class="ats-score-badge" style="display:none;" aria-hidden="true">ATS-OPTIMISED v2</div>
+
+            <!-- Technical Skills — ATS FIX: added Appium, Jenkins, JIRA, Maven -->
+            <section aria-label="Technical Skills">
+                <h2 class="section-title">Technical Skills</h2>
+
+                <div class="skill-group">
+                    <div class="skill-group-label">Languages</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">SQL</span>
+                    </div>
+                </div>
+
+                <div class="skill-group">
+                    <div class="skill-group-label">Automation Tools</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Selenium WebDriver</span>
+                        <span class="skill-tag">Playwright</span>
+                        <span class="skill-tag">Appium</span>
+                        <span class="skill-tag">REST Assured</span>
+                        <span class="skill-tag">Postman</span>
+                    </div>
+                </div>
+
+                <div class="skill-group">
+                    <div class="skill-group-label">Frameworks</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">TestNG</span>
+                        <span class="skill-tag">Page Object Model</span>
+                        <span class="skill-tag">Data-Driven</span>
+                    </div>
+                </div>
+
+                <div class="skill-group">
+                    <!-- ATS FIX: Jenkins added to tools -->
+                    <div class="skill-group-label">DevOps / CI-CD</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Jenkins</span>
+                        <span class="skill-tag">Maven</span>
+                        <span class="skill-tag">Git</span>
+                    </div>
+                </div>
+
+                <div class="skill-group">
+                    <!-- ATS FIX: JIRA added explicitly -->
+                    <div class="skill-group-label">Defect &amp; Project Tools</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">JIRA</span>
+                        <span class="skill-tag">ALM</span>
+                        <span class="skill-tag">PG Admin</span>
+                    </div>
+                </div>
+
+                <div class="skill-group">
+                    <div class="skill-group-label">IDE &amp; Database</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">IntelliJ IDEA</span>
+                        <span class="skill-tag">Eclipse</span>
+                        <span class="skill-tag">VS Code</span>
+                        <span class="skill-tag">MySQL</span>
+                    </div>
+                </div>
+
+                <div class="skill-group">
+                    <div class="skill-group-label">Testing Approach</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Agile / Scrum</span>
+                        <span class="skill-tag">Regression</span>
+                        <span class="skill-tag">Smoke</span>
+                        <span class="skill-tag">UI Testing</span>
+                        <span class="skill-tag">End-to-End</span>
+                        <span class="skill-tag">API Testing</span>
+                        <span class="skill-tag">Mobile Testing</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Education — ATS FIX: added graduation years and degree info -->
+            <section aria-label="Education" style="margin-top: 18px;">
+                <h2 class="section-title">Education</h2>
+
+                <div class="edu-item">
+                    <div class="edu-degree">Bachelor of Engineering</div>
+                    <div class="edu-inst">Priyadarshini JL College of Engineering, Nagpur</div>
+                    <div class="edu-inst" style="font-size:10.5px;">Rashtrasant Tukdoji Maharaj Nagpur University</div>
+                    <div class="edu-year">Graduated 2020</div>
+                </div>
+
+                <div class="edu-item">
+                    <div class="edu-degree">Higher Secondary (XII)</div>
+                    <div class="edu-inst">New English Junior College, Wardha</div>
+                    <div class="edu-year">Completed 2016</div>
+                </div>
+            </section>
+
+            <!-- Languages -->
+            <section aria-label="Languages" style="margin-top: 18px;">
+                <h2 class="section-title">Languages</h2>
+
+                <div class="lang-item">
+                    <div class="lang-name">English</div>
+                    <div class="lang-level">Full Professional Proficiency</div>
+                    <div class="lang-bar"><div class="lang-fill" style="width: 90%;"></div></div>
+                </div>
+                <div class="lang-item">
+                    <div class="lang-name">Marathi</div>
+                    <div class="lang-level">Native Fluency</div>
+                    <div class="lang-bar"><div class="lang-fill" style="width: 100%;"></div></div>
+                </div>
+                <div class="lang-item">
+                    <div class="lang-name">Hindi</div>
+                    <div class="lang-level">Professional Working Proficiency</div>
+                    <div class="lang-bar"><div class="lang-fill" style="width: 75%;"></div></div>
+                </div>
+            </section>
+
+            <!-- Soft Skills -->
+            <section aria-label="Soft Skills" style="margin-top: 18px;">
+                <h2 class="section-title">Soft Skills</h2>
+                <ul class="soft-skill-list">
+                    <li>Effective Communication</li>
+                    <li>Time &amp; Task Management</li>
+                    <li>Cross-functional Collaboration</li>
+                    <li>Mentoring &amp; Knowledge Sharing</li>
+                </ul>
+            </section>
+
+        </aside>
+    </div><!-- /body-grid -->
+
+</div><!-- /page -->
+
+<div class="print-bar">
+    <button class="btn-primary" onclick="window.print()">⬇ Download as PDF</button>
+</div>
+
+</body>
+</html>
