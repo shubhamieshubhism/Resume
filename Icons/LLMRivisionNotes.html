@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generative AI & LLMs – Revision Notes</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #fff;
+        }
+        h1, h2, h3, h4 {
+            color: #0a4b6e;
+            margin-top: 1.5em;
+        }
+        h1 {
+            text-align: center;
+            border-bottom: 3px solid #0a4b6e;
+            padding-bottom: 10px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1em 0;
+        }
+        th, td {
+            border: 1px solid #aaa;
+            padding: 8px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #eef4fc;
+        }
+        .mermaid {
+            background: #f9f9f9;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            text-align: center;
+            overflow-x: auto;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 12px;
+            border-radius: 6px;
+            overflow-x: auto;
+        }
+        hr {
+            margin: 2em 0;
+        }
+        .summary-box {
+            background: #eef4fc;
+            padding: 15px;
+            border-left: 5px solid #0a4b6e;
+            margin: 20px 0;
+        }
+        @media print {
+            body {
+                font-size: 10pt;
+            }
+            .mermaid {
+                break-inside: avoid;
+            }
+            h1, h2, h3 {
+                break-after: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h1>📘 Generative AI & LLMs – Revision Notes</h1>
+
+<!-- ============================================= -->
+<!-- 1. Generative AI Essentials -->
+<!-- ============================================= -->
+<h2>1. Generative AI Essentials</h2>
+
+<h3>1.1 What is Generative AI?</h3>
+<ul>
+<li><strong>Definition:</strong> Creates <strong>new</strong> content (text, images, music, code) that never existed before, by learning patterns from training data.</li>
+<li><strong>Analogy:</strong> Chef tastes 10,000 soups → invents a brand‑new soup that “tastes right”.</li>
+</ul>
+<div class="mermaid">
+flowchart LR
+    A["Training data"] --> B["Model learns patterns"]
+    B --> C["Generates new content from prompt"]
+</div>
+
+<h3>1.2 Generative vs. Discriminative AI</h3>
+<table>
+    <tr><th>Aspect</th><th>Generative AI</th><th>Discriminative AI</th></tr>
+    <tr><td>Goal</td><td>Create new things that look real</td><td>Tell things apart (classify)</td></tr>
+    <tr><td>Output</td><td>Text, image, audio, code, etc.</td><td>Label or category (“cat”, “spam”)</td></tr>
+    <tr><td>Example task</td><td>“Draw a cat that doesn’t exist”</td><td>“Is this a cat or a dog?”</td></tr>
+    <tr><td>Training data</td><td>Needs many examples to learn patterns</td><td>Needs labelled examples to learn boundaries</td></tr>
+    <tr><td>Analogy</td><td>Artist painting a new landscape</td><td>Security guard recognising faces</td></tr>
+</table>
+<div class="mermaid">
+flowchart TD
+    subgraph GenAI
+        A["Prompt: 'a fluffy white cat'"] --> B["Generative Model"] --> C["New image"]
+    end
+    subgraph DiscAI
+        D["Existing cat image"] --> E["Discriminative Model"] --> F["Label: 'cat'"]
+    end
+</div>
+<p><strong>When to use:</strong> Generative → need new content; Discriminative → need recognition/classification.</p>
+
+<h3>1.3 LLMs vs Other AI Model Types</h3>
+<ul>
+<li><strong>LLM (GPT‑4, Claude):</strong> Specialised in text – understands, generates, reasons. Limitation: hallucinations, no vision/sound (unless multimodal).</li>
+<li><strong>Other models:</strong> For images (Diffusion), audio (Whisper), etc.</li>
+</ul>
+
+<h3>1.4 Key Use Cases</h3>
+<h4>i. Intelligent Chatbots</h4>
+<div class="mermaid">
+flowchart LR
+    User["User types question"] --> LLM --> Reply["LLM reply"]
+    KB["Knowledge base"] -.-> LLM
+</div>
+
+<h4>ii. Document Understanding (RAG)</h4>
+<p><strong>RAG = Retrieval‑Augmented Generation</strong> – reduces hallucinations, allows citations.<br>
+<strong>Steps:</strong> 1. Break documents into chunks. 2. Embed question. 3. Search similar chunks. 4. Retrieve relevant chunk. 5. Feed prompt <code>Context + Question</code> to LLM. 6. Answer with citation.</p>
+<div class="mermaid">
+flowchart TD
+    Q["User question"] --> EmbedQ["Embed question"]
+    Docs["Documents"] --> Chunk["Chunk documents"] --> Store["Store embeddings"]
+    EmbedQ --> Search["Similarity search"] --> Retrieved["Retrieved chunk"]
+    Retrieved --> Prompt["Prompt: Context + Question"] --> LLM --> Answer["Answer with citation"]
+</div>
+
+<h4>iii. Coding Assistants</h4>
+<div class="mermaid">
+flowchart TD
+    Dev["Developer types: def calculate_average(numbers):"] --> Context["Assistant sees context"]
+    Context --> LLM["LLM predicts next tokens: 'total = sum(numbers)'"]
+    LLM --> Suggestion["Suggestion appears in grey"]
+    Suggestion --> Choice{"Developer action?"}
+    Choice -- Tab --> Accept
+    Choice -- Keep typing --> Reject
+    Choice -- Ignore --> Nothing
+</div>
+
+<h4>iv. Automation & Decision Support</h4>
+<p>Pattern: <strong>Classify → Extract → Decide → Act</strong>. Used in customer support, fraud detection, etc. LLM powers classification, extraction, drafting.</p>
+
+<hr>
+
+<!-- ============================================= -->
+<!-- 2. Large Language Model Fundamentals -->
+<!-- ============================================= -->
+<h2>2. Large Language Model Fundamentals</h2>
+
+<h3>2.1 How LLMs Work (No Math)</h3>
+<ul>
+<li><strong>Core idea:</strong> Next‑token prediction (super‑powered autocomplete).</li>
+<li><strong>Analogy:</strong> Friend says “The capital of France is…” → you think “Paris”.</li>
+<li><strong>Attention:</strong> Each word “looks back” at previous words to decide which matter most.</li>
+</ul>
+<div class="mermaid">
+flowchart LR
+    Input["Input tokens"] --> Attention["Attention layers"] --> Predict["Predict next token"] --> Append["Append to context"] --> Loop["Repeat"]
+</div>
+
+<h3>2.2 Tokens, Tokenization, Embeddings</h3>
+<ul>
+<li><strong>Token:</strong> piece of a word or punctuation. Example: <code>"unhappiness" → ["un", "happiness"]</code></li>
+<li><strong>Embedding:</strong> a vector (list of numbers) capturing meaning.</li>
+<li><strong>Analogy:</strong> map coordinates: “king”, “queen”, “prince” close together.</li>
+</ul>
+<div class="mermaid">
+flowchart LR
+    Text["Text: 'Hello world'"] --> Tokenizer["Tokenizer"] --> Tokens["Tokens: ['Hello', 'world', '!']"]
+    Tokens --> IDs["Token IDs: [1234, 5678, 99]"]
+    IDs --> Embedding["Embedding: [0.12, -0.45, ...]"]
+</div>
+
+<h3>2.3 Context Windows and Memory Limits</h3>
+<ul>
+<li><strong>Context window:</strong> max tokens the model can see at once (short‑term memory).</li>
+<li>Limited by computational cost O(n²). Typical sizes: GPT‑3.5 (4K), GPT‑4 Turbo (128K), Claude 3 (200K), Gemini 1.5 Pro (2M experimental).</li>
+<li>Exceeding limit → oldest tokens dropped (model forgets). <strong>Tip:</strong> Use RAG for long documents.</li>
+</ul>
+
+<h3>2.4 Decoding Parameters</h3>
+<table>
+    <tr><th>Parameter</th><th>What it does</th><th>Increase when…</th><th>Decrease when…</th></tr>
+    <tr><td>Temperature</td><td>Controls randomness</td><td>want creative, diverse outputs</td><td>need factual, consistent answers</td></tr>
+    <tr><td>Top‑p</td><td>Consider smallest set of tokens with probability p</td><td>trust highest-probability tokens</td><td>want surprise (rare words)</td></tr>
+    <tr><td>Top‑k</td><td>Only allow k most likely tokens</td><td>avoid very unlikely (nonsense) tokens</td><td>want maximum diversity</td></tr>
+    <tr><td>Frequency penalty</td><td>Reduce chance of repeating tokens</td><td>model repeats phrases</td><td>repetition is natural (e.g., lists)</td></tr>
+</table>
+<p>Example: Customer support → temp=0.2, top‑p=1.0; Creative writing → temp=0.9, top‑k=40.</p>
+
+<h3>2.5 Roles in LLM Conversations</h3>
+<table>
+    <tr><th>Role</th><th>Definition</th><th>Example</th></tr>
+    <tr><td>System</td><td>Hidden instruction setting personality/rules</td><td>“You are a pirate who never mentions math.”</td></tr>
+    <tr><td>User</td><td>Human’s message</td><td>“What is the capital of France?”</td></tr>
+    <tr><td>Assistant</td><td>Model’s reply</td><td>“Paris, arrr!”</td></tr>
+</table>
+<div class="mermaid">
+flowchart LR
+    System["System message (hidden)"] --> User1["User message 1"] --> Assistant1["Assistant reply 1"] --> User2["User message 2"] --> Assistant2["Assistant reply 2"]
+</div>
+
+<hr>
+
+<!-- ============================================= -->
+<!-- 3. Embedding & Vector Basics -->
+<!-- ============================================= -->
+<h2>3. Embedding & Vector Basics</h2>
+
+<h3>3.1 What embeddings represent</h3>
+<p><strong>Definition:</strong> A list of numbers capturing meaning. <strong>Analogy:</strong> coordinates on a map – similar meanings are close.</p>
+
+<h3>3.2 Vector Similarity & Distance Metrics</h3>
+<ul>
+<li><strong>Cosine similarity:</strong> measures angle (direction). Best for semantic search (ignores length).</li>
+<li><strong>Euclidean distance:</strong> straight‑line distance. Use when exact numeric values matter.</li>
+</ul>
+
+<h3>3.3 How Semantic Search Works</h3>
+<div class="mermaid">
+flowchart LR
+    Query["User query"] --> Embed["Embedding model"] --> QVec["Query vector"]
+    DB[("Vector DB with stored embeddings")] --> Search["Similarity search"] --> Results["Top‑k similar items"]
+</div>
+
+<h3>3.4 Embedding Models vs. LLM Models</h3>
+<table>
+    <tr><th>Feature</th><th>Embedding Model</th><th>LLM</th></tr>
+    <tr><td>Purpose</td><td>Convert text → vector</td><td>Generate new text</td></tr>
+    <tr><td>Output</td><td>List of numbers</td><td>Sequence of words</td></tr>
+    <tr><td>Training</td><td>Make similar texts have similar vectors</td><td>Predict next token</td></tr>
+    <tr><td>Use case</td><td>Semantic search, RAG retrieval</td><td>Chatbots, code gen</td></tr>
+    <tr><td>Can chat?</td><td>No</td><td>Yes</td></tr>
+</table>
+
+<h3>3.5 Vector Databases</h3>
+<ul>
+<li>Built for fast similarity search at scale. Use indexes (e.g., HNSW).</li>
+<li>Popular: Pinecone, Weaviate, Qdrant, Chroma, pgvector.</li>
+</ul>
+<div class="mermaid">
+flowchart TD
+    subgraph Offline
+        Docs["Documents"] --> Chunks["Chunks"] --> EmbedModel["Embedding model"] --> Store["Store vectors in DB"]
+    end
+    subgraph Online
+        Query["User question"] --> QueryEmbed["Embedding model"] --> Search["Search similar vectors"] --> Retrieve["Retrieve chunks"] --> LLM["LLM generates answer"]
+    end
+</div>
+
+<hr>
+
+<!-- ============================================= -->
+<!-- 4. Prompt Engineering -->
+<!-- ============================================= -->
+<h2>4. Prompt Engineering</h2>
+
+<h3>4.1 Prompting Basics</h3>
+<ul>
+<li><strong>Prompt:</strong> instruction/input given to AI.</li>
+<li><strong>Prompt engineering:</strong> skill of writing prompts to get best output.</li>
+<li>Why it matters: models are literal pattern‑matchers – vague input → vague output.</li>
+</ul>
+
+<h3>4.2 Zero‑shot, One‑shot, Few‑shot Prompting</h3>
+<table>
+    <tr><th>Technique</th><th># Examples</th><th>Best for</th><th>Advantage</th><th>Disadvantage</th></tr>
+    <tr><td>Zero‑shot</td><td>0</td><td>simple, well‑known tasks</td><td>short prompt, fast</td><td>may miss nuance</td></tr>
+    <tr><td>One‑shot</td><td>1</td><td>slightly tricky tasks</td><td>very little extra cost</td><td>only one pattern</td></tr>
+    <tr><td>Few‑shot</td><td>2–5</td><td>complex or unusual tasks</td><td>high accuracy, teach new patterns</td><td>longer prompt, more tokens</td></tr>
+</table>
+
+<h3>4.3 Chain‑of‑Thought (CoT) and Tree‑of‑Thoughts (ToT)</h3>
+<table>
+    <tr><th></th><th>Chain‑of‑Thought (CoT)</th><th>Tree‑of‑Thoughts (ToT)</th></tr>
+    <tr><td>How it works</td><td>Single linear reasoning path</td><td>Multiple parallel reasoning paths, evaluated and combined</td></tr>
+    <tr><td>Analogy</td><td>Math teacher says “show your work”</td><td>Chess player considers several moves ahead</td></tr>
+    <tr><td>Use when</td><td>math, logic, multi‑step</td><td>planning, creative solutions, trade‑offs</td></tr>
+</table>
+<div class="mermaid">
+flowchart TD
+    subgraph CoT
+        Start1["Start"] --> S1["Step 1"] --> S2["Step 2"] --> S3["Step 3"] --> Answer
+    end
+    subgraph ToT
+        Start2["Start"] --> T1A["Thought 1a"] --> Eval1["Eval"] --> C1["Continue best"]
+        Start2 --> T1B["Thought 1b"] --> Eval2["Eval"] --> C2["Continue best"]
+        Start2 --> T1C["Thought 1c"] --> Eval3["Eval"] --> C3["Continue best"]
+        C1 & C2 & C3 --> Final["Final answer"]
+    end
+</div>
+
+<h3>4.4 Structured Prompting, Guardrails, Role Prompts</h3>
+<ul>
+<li><strong>Structured prompting:</strong> Use JSON, XML, bullet points to guide format.</li>
+<li><strong>Guardrails:</strong> constraints for safety, tone, factuality (e.g., “If unknown, say ‘I don’t know’”).</li>
+<li><strong>Role prompts (personas):</strong> “Act as a [profession/character]” changes vocabulary, tone, perspective.</li>
+</ul>
+<p><strong>Complete structured prompt template:</strong></p>
+<pre>
+[ROLE] You are a helpful coding assistant specialising in Python.
+[INSTRUCTION] Generate a function that returns the average of a list.
+[FORMAT] Return only the code block, no extra text.
+[GUARDRAILS] - If list empty, return None. - Use only built‑ins.
+[USER INPUT] List: [10, 20, 30]
+</pre>
+
+<h3>Cheat Sheet – Prompt Engineering Techniques</h3>
+<table>
+    <tr><th>Technique</th><th>When to use</th><th>Example snippet</th></tr>
+    <tr><td>Zero‑shot</td><td>Simple, universal tasks</td><td>“Classify sentiment: ‘I’m tired.’”</td></tr>
+    <tr><td>One‑shot</td><td>Small nudge</td><td>“Cat → Chat. Now translate ‘Dog’ to French:”</td></tr>
+    <tr><td>Few‑shot</td><td>Complex / unusual tasks</td><td>Three sentiment‑to‑emoji examples then new one</td></tr>
+    <tr><td>Chain‑of‑Thought</td><td>Math, logic, multi‑step</td><td>“Let’s think step by step.”</td></tr>
+    <tr><td>Tree‑of‑Thoughts</td><td>Planning, creativity, decisions</td><td>“Consider several options and choose best.”</td></tr>
+    <tr><td>Structured prompting</td><td>Machine‑readable output</td><td>“Return JSON {‘name’: …, ‘age’: …}”</td></tr>
+    <tr><td>Guardrails</td><td>Safety, tone, factuality</td><td>“If unknown, say ‘I don’t know.’”</td></tr>
+    <tr><td>Role prompt</td><td>Set style / perspective</td><td>“You are a friendly librarian.”</td></tr>
+</table>
+
+<hr>
+
+<!-- ============================================= -->
+<!-- Final Mental Model -->
+<!-- ============================================= -->
+<div class="summary-box">
+    <h3>✅ Final Mental Model (Summary)</h3>
+    <ul>
+        <li><strong>Generative AI</strong> = creates new content (chef inventing dish)</li>
+        <li><strong>Discriminative AI</strong> = categorises existing things (security guard)</li>
+        <li><strong>LLM</strong> = generative AI for text – predicts next token</li>
+        <li><strong>Tokens</strong> = pieces of text; <strong>embeddings</strong> = numeric vectors of meaning</li>
+        <li><strong>Context window</strong> = short‑term memory (4K–200K tokens)</li>
+        <li><strong>Decoding parameters</strong> (temp, top‑p, top‑k) = creativity vs consistency dials</li>
+        <li><strong>Roles</strong> (system/user/assistant) = structure conversation</li>
+        <li><strong>Semantic search</strong> = uses embeddings + cosine similarity</li>
+        <li><strong>Vector database</strong> = fast similarity search at scale</li>
+        <li><strong>RAG</strong> = retrieve chunks (embedding model) + generate answer (LLM)</li>
+        <li><strong>Prompt engineering</strong> = zero/many‑shot, CoT/ToT, guardrails, personas</li>
+    </ul>
+</div>
+
+<script>
+    mermaid.initialize({ startOnLoad: true, theme: 'default', securityLevel: 'loose' });
+</script>
+</body>
+</html>
